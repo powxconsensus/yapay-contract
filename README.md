@@ -1,1 +1,1 @@
-# DigiPay
+# YaPay
