@@ -47,6 +47,8 @@ const chainIds = {
   sepolia: 11155111,
   base: 84531,
   dogechainTestnet: 568,
+  x1: 195,
+  mumbaiZkevm: 1442,
 };
 
 // Ensure that we have all the environment variables we need.
@@ -64,7 +66,6 @@ const infuraApiKey = process.env.INFURA_API_KEY;
 if (!infuraApiKey) {
   throw new Error("Please set your INFURA_API_KEY in a .env file");
 }
-
 function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
   let url = "";
   url = "https://" + network + ".infura.io/v3/" + infuraApiKey;
@@ -110,6 +111,10 @@ function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
     url = "https://rpc.goerli.linea.build";
   } else if (network == "fuji") {
     url = "https://rpc.ankr.com/avalanche_fuji";
+  } else if (network == "x1") {
+    url = "https://testrpc.x1.tech";
+  } else if (network == "mumbaiZkevm") {
+    url = "https://rpc.public.zkevm-test.net";
   }
   return {
     accounts: [`${process.env.PRIVATE_KEY}`],
@@ -166,6 +171,9 @@ const config = {
     scrollTestnet: getChainConfig("scrollTestnet"),
     arbitrumGoerli: getChainConfig("arbitrumGoerli"),
     lineaTestnet: getChainConfig("lineaTestnet"),
+    base: getChainConfig("base"),
+    mumbaiZkevm: getChainConfig("mumbaiZkevm"),
+    x1: getChainConfig("x1"),
   },
   paths: {
     artifacts: "./artifacts",
@@ -219,7 +227,13 @@ const config = {
       moonbeam: process.env.MOONBEAM_ETHERSCAN_KEY,
       kava: process.env.MOONBEAM_ETHERSCAN_KEY,
       avalancheFujiTestnet: "QAE2JD7XIBCYB6Z6GSKNJIHKZ8XGVYM8AI",
+      ropsten: "FF9TZXKT2JWZ68M2EJH1FGCX13IB7ZKPUZ",
+      sepolia: "12585f3cbbec4e18acf81cdc798f58a4",
+      dogechainTestnet: "QAE2JD7XIBCYB6Z6GSKNJIHKZ8XGVYM8AI",
+      mantleTestnet: "fa7e1f1c-058b-4070-93dc-0fa53c15c2c3",
       scrollTestnet: "QAE2JD7XIBCYB6Z6GSKNJIHKZ8XGVYM8AI",
+      arbitrumGoerli: "6XEVXPKF5RMB577JNKKHWZ3M72Q7ZN1KN8",
+      lineaTestnet: "N6YZUFXQEVHDJ3Z5SEMDIBWVKW96UBX4B8",
     },
 
     customChains: [
